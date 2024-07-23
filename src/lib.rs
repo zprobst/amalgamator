@@ -26,7 +26,7 @@
 //! impl Amalgamate for Person {
 //!     type Key = String;
 //!
-//!     fn amalgamation_key(&self) -> Self::Key {
+//!     fn key(&self) -> Self::Key {
 //!         self.name.clone()
 //!     }
 //!
@@ -38,7 +38,7 @@
 //!
 //! In this example, we have a `Person` struct that has a `name` and a set of `friends`.
 //! We implement the `Amalgamate` trait for `Person` by defining the `Key` type as `String` and
-//! implementing the `amalgamation_key` and `amalgamate` functions.
+//! implementing the `key` and `amalgamate` functions.
 //! We assume that the value of the `name` field is unique to each person,
 //! so we use it as the key to determine if two `Person` objects should be combined.
 //!
@@ -57,7 +57,7 @@
 //! # impl Amalgamate for Person {
 //! #     type Key = String;
 //! #
-//! #     fn amalgamation_key(&self) -> Self::Key {
+//! #     fn key(&self) -> Self::Key {
 //! #         self.name.clone()
 //! #     }
 //! #
@@ -117,7 +117,7 @@ pub trait Amalgamate {
     type Key: Hash + Eq;
 
     /// Constructs the key that will be used to determine if two elements should be combined.
-    fn amalgamation_key(&self) -> Self::Key;
+    fn key(&self) -> Self::Key;
 
     /// Determines if two elements should be combined.
     fn amalgamate(&mut self, other: Self);
@@ -151,7 +151,7 @@ where
     /// If an element with the same key already exists in the `Amalgamator`, the two elements will be combined.
     /// This will be done by calling `Amalgamate::amalgamate` on the existing element with the new element as an argument.
     pub fn add(&mut self, item: T) {
-        let key = item.amalgamation_key();
+        let key = item.key();
         if let Some(existing) = self.get_by_key_mut(&key) {
             existing.amalgamate(item);
         } else {
@@ -197,7 +197,7 @@ where
 
     /// Removes the element from the `Amalgamator` and returns it.
     pub fn remove(&mut self, item: &T) -> Option<T> {
-        self.remove_by_key(&item.amalgamation_key())
+        self.remove_by_key(&item.key())
     }
 
     /// Returns the number of elements in the `Amalgamator`.
@@ -219,7 +219,7 @@ where
     ///
     /// Keep in mind that this is checking for something that has the same key, not the same value.
     pub fn contains(&self, item: &T) -> bool {
-        self.contains_key(&item.amalgamation_key())
+        self.contains_key(&item.key())
     }
 
     /// Returns `true` if the `Amalgamator` contains an element with the given key.
@@ -496,7 +496,7 @@ mod tests {
     impl Amalgamate for Person {
         type Key = String;
 
-        fn amalgamation_key(&self) -> Self::Key {
+        fn key(&self) -> Self::Key {
             self.name.clone()
         }
 
