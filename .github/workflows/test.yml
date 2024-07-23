@@ -117,8 +117,8 @@ jobs:
     #
     # is set in two places on your repo:
     #
-    # - https://github.com/jonhoo/guardian/settings/secrets/actions
-    # - https://github.com/jonhoo/guardian/settings/secrets/dependabot
+    # - https://github.com/zprobst/amalgamator/settings/secrets/actions
+    # - https://github.com/zprobst/amalgamator/settings/secrets/dependabot
     #
     # (the former is needed for codecov uploads to work with Dependabot PRs)
     #

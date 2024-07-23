@@ -2,6 +2,9 @@
 name = "amalgamator"
 version = "0.1.0"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "A set/map like data structure that allows you to combine members together."
+repository = "https://github.com/zprobst/amalgamator"
 
 [dependencies]
 serde = { version = "1", optional = true }
