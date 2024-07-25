@@ -104,7 +104,7 @@
 
 use std::{
     borrow::Borrow,
-    collections::hash_map::{RandomState, HashMap},
+    collections::hash_map::{HashMap, RandomState},
     hash::{BuildHasher, Hash},
     ops::{Index, IndexMut},
 };
