@@ -42,8 +42,8 @@
 //! We assume that the value of the `name` field is unique to each person,
 //! so we use it as the key to determine if two `Person` objects should be combined.
 //!
-//! Now that we have implemented the `Amalgamate` trait, we can use the `Amalgamator` data structure to combine `Person` objects together.
-//! Better yet, we can use it just like a regular set/map data structure.
+//! Now that we have implemented the `Amalgamate` trait, we can use the `Amalgamator` data structure
+//! to combine `Person` objects together. Better yet, we can use it just like a regular set/map data structure.
 //!
 //! ```
 //! use amalgamator::Amalgamator;
@@ -104,8 +104,8 @@
 
 use std::{
     borrow::Borrow,
-    collections::HashMap,
-    hash::{BuildHasher, Hash, RandomState},
+    collections::hash_map::{RandomState, HashMap},
+    hash::{BuildHasher, Hash},
     ops::{Index, IndexMut},
 };
 
@@ -149,7 +149,8 @@ where
     /// Adds an element to the `Amalgamator`.
     ///
     /// If an element with the same key already exists in the `Amalgamator`, the two elements will be combined.
-    /// This will be done by calling `Amalgamate::amalgamate` on the existing element with the new element as an argument.
+    /// This will be done by calling `Amalgamate::amalgamate` on the existing element with the new element as
+    /// an argument.
     pub fn add(&mut self, item: T) {
         let key = item.key();
         if let Some(existing) = self.get_by_key_mut(&key) {
